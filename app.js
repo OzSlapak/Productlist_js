@@ -1,24 +1,9 @@
-const products = [
-    {
-        id:1,
-        title:'iphone 9',
-        description:'An apple mobile which is nothing like apple',
-        price: 549,
-        thumbnail:'https://dummyjson.com/image/i/products/1/thumbnail.jpg',
-    },
-    {
-        id:1,
-        title:'iphone 9',
-        description:'An apple mobile which is nothing like apple',
-        price: 549,
-        thumbnail:'https://dummyjson.com/image/i/products/1/thumbnail.jpg',
-    }
-    
-];
+import{products} from './products.js';
+
 const sectionCenter = document.querySelector('.section-center');
 
-const productList = products.map((product) => {
-  return `
+const productList = products.map(
+    (product) =>  `
     <article class="product-item">
       <img
         src= "${product.thumbnail}"
@@ -33,7 +18,12 @@ const productList = products.map((product) => {
         <h4 class="price">$549${product.price}</h4>
       </div>
     </article>
-`;
-});
-
+`
+);
+const categories = products.reduce((acc, product) => {
+    if (!acc.includes(product.category)) {
+      acc.push(product.category);
+    }
+    return acc;
+  }, []);
 sectionCenter.innerHTML = productList.join('');
